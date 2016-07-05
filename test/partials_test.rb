@@ -167,8 +167,8 @@ context "Rabl::Partials" do
         ::Rails = stub(Class.new)
         ::ActionPack = Module.new
         ::ActionPack::VERSION = Module.new
-        ::ActionPack::VERSION::MAJOR = 3
-        ::ActionPack::VERSION::MINOR = 2
+        ::ActionPack::VERSION::MAJOR = 4
+        ::ActionPack::VERSION::MINOR = 0
         @it = TestPartial.new
 
         def @it.context_scope; @context_scope ||= Object.new; end

@@ -19,27 +19,6 @@ if defined?(Tilt)
   Tilt.register 'rabl', RablTemplate
 end
 
-# Rails 2.X Template
-if defined?(ActionView) && defined?(Rails) && Rails.respond_to?(:version) && Rails.version.to_s =~ /^2/
-  require 'action_view/base'
-  require 'action_view/template'
-
-  module ActionView
-    module TemplateHandlers
-      class RablHandler < TemplateHandler
-        include Compilable
-
-        def compile(template) %{
-          ::Rabl::Engine.new(#{template.source.inspect}, { :format => #{template.format.inspect} }).
-            render(self, assigns.merge(local_assigns))
-        } end
-      end
-    end
-  end
-
-  ActionView::Template.register_template_handler :rabl, ActionView::TemplateHandlers::RablHandler
-end
-
 # Rails 3.X / 4.X Template
 if defined?(ActionView) && defined?(Rails) && Rails.respond_to?(:version) && Rails.version.to_s =~ /^[345]/
   module ActionView
